@@ -1,0 +1,136 @@
+<main class="container-fluid">
+  <section class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title">Formulario</h5>
+
+      <form [formGroup]="estudianteForm" (ngSubmit)="onSubmit()" class="row">
+        <div class="col-6 row g-3">
+          <div class="col">
+            <input
+              formControlName="nombre"
+              type="text"
+              [class.is-invalid]="
+                nombreControl.invalid && nombreControl.touched
+              "
+              class="form-control"
+              placeholder="First name"
+              aria-label="First name"
+            />
+            <app-form-error-helper
+              *ngIf="nombreControl.invalid && nombreControl.touched"
+              [formErrors]="nombreControl.errors"
+            ></app-form-error-helper>
+            <!-- <div *ngIf="nombreControl.hasError('required')" class="invalid-feedback">
+              Es requerido
+            </div>
+            <div *ngIf="nombreControl.hasError('minlength')" class="invalid-feedback">
+              El largo esperado es de 3 caracteres
+            </div> -->
+          </div>
+
+          <div class="col">
+            <input
+              [formControl]="apellidoControl"
+              type="text"
+              [class.is-invalid]="
+                apellidoControl.invalid && apellidoControl.touched
+              "
+              class="form-control"
+              placeholder="Last name"
+              aria-label="Last name"
+            />
+            <app-form-error-helper
+              *ngIf="apellidoControl.invalid && apellidoControl.touched"
+              [formErrors]="apellidoControl.errors"
+            ></app-form-error-helper>
+          </div>
+          <div class="col-6">
+            <input
+              [class.is-invalid]="emailControl.invalid && emailControl.touched"
+              [formControl]="emailControl"
+              type="email"
+              class="form-control"
+              placeholder="Email"
+              aria-label="Email"
+            />
+            <app-form-error-helper
+              *ngIf="emailControl.invalid && emailControl.touched"
+              [formErrors]="emailControl.errors"
+            ></app-form-error-helper>
+          </div>
+          <div class="col-13">
+            <input
+              [class.is-invalid]="
+                ciudadControl.invalid && ciudadControl.touched
+              "
+              [formControl]="ciudadControl"
+              type="text"
+              class="form-control"
+              placeholder="Ciudad"
+              aria-label="Ciudad"
+            />
+            <app-form-error-helper
+              *ngIf="ciudadControl.invalid && ciudadControl.touched"
+              [formErrors]="ciudadControl.errors"
+            ></app-form-error-helper>
+          </div>
+          <div class="col">
+            <input
+              [class.is-invalid]="celControl.invalid && celControl.touched"
+              [formControl]="celControl"
+              type="text"
+              class="form-control"
+              placeholder="Celular"
+              aria-label="Celular"
+            />
+            <app-form-error-helper
+              *ngIf="celControl.invalid && celControl.touched"
+              [formErrors]="celControl.errors"
+            ></app-form-error-helper>
+          </div>
+        </div>
+        <!--<div class="col-6">
+          <pre>{{ estudianteForm.value | json }}</pre>
+
+          <p>Errores del control de nombre</p>
+          <pre>{{ nombreControl.errors | json }}</pre>
+
+          <p>Errores del control de apellido</p>
+          <pre>{{ apellidoControl.errors | json }}</pre>
+        </div> -->
+        <div class="col-12 mt-3">
+          <button class="btn btn-primary" type="submit">Registrar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section class="card">
+    <div class="card-body">
+      <pre>{{ estudiantes }}</pre>
+    </div>
+    <div class="container-fluid">
+      <h5 class="mb-3">Tabla de Estudiantes</h5>
+      <table class="table table-stripped">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>E-mail</th>
+            <th>Ciudad</th>
+            <th>Celular</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let estudiante of estudiantes">
+            <td>{{ estudiante.nombre }}</td>
+            <td>{{ estudiante.apellido }}</td>
+            <td>{{ estudiante.email }}</td>
+            <td>{{ estudiante.ciudad }}</td>
+            <td>{{ estudiante.celular }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
